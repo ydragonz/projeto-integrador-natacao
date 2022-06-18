@@ -71,20 +71,26 @@ if(isset($_POST['login_enviar'])) {
 
   <body class="text-center">
     <main class="form-signin">
-      <form action="index.php" method="POST">
-        <img class="mb-4" src="imagens/unaerp_extended.png" alt="Logo da UNAERP" width="144" height="70">
-        <h1 class="h3 mb-3 fw-normal">Faça login</h1>
-
-        <div class="form-floating">
+      <img class="mb-4" src="imagens/unaerp_extended.png" alt="Logo da UNAERP" width="144" height="70">
+      <h1 class="h3 mb-3 fw-normal">Faça login</h1>
+      <form class="body row" action="index.php" method="POST">
+        <div class="form-floating col-md-4 mb-3"></div>
+        <div class="form-floating col-md-4 mb-3">
           <input name="cod_login" type="text" class="form-control" id="floatingInput" maxlength="60">
           <label for="floatingInput">E-mail</label>
         </div>
-        <div class="form-floating">
+        <div class="form-floating col-md-4 mb-3"></div>
+        <div class="form-floating col-md-4 mb-3"></div>
+        <div class="form-floating col-md-4 mb-3">
           <input name="senha_login" type="password" class="form-control" id="floatingPassword" placeholder="Sua senha" maxlength="10">
           <label for="floatingPassword">Senha</label>
         </div>
-
-        <button name="login_enviar" class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
+        <div class="form-floating col-md-4 mb-3"></div>
+        <div class="form-floating col-md-4 mb-3"></div>
+        <div class="form-floating col-md-4 mb-3">
+          <button name="login_enviar" class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
+        </div>
+        <div class="form-floating col-md-4 mb-3"></div>
       </form>
     </main>
   </body>

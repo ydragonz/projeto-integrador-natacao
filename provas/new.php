@@ -11,15 +11,12 @@ if($_SESSION['logado'] == 1 && $_SESSION['sts_usuario'] == 1) {
       die("Erro de conexão: ".$conn->connect_error);
     }
     else {
-      $cod_paciente = mysqli_real_escape_string($conn, $_POST['cod_paciente']);
-      $cod_usuario = $_SESSION['cod_usuario'];
-      $pad_exame = mysqli_real_escape_string($conn, $_POST['pad_exame']);
-      $pas_exame = mysqli_real_escape_string($conn, $_POST['pas_exame']);
-      $gli_exame = mysqli_real_escape_string($conn, $_POST['gli_exame']);
-      $col_exame = mysqli_real_escape_string($conn, $_POST['col_exame']);
+      $nom_prova = mysqli_real_escape_string($conn, $_POST['nom_prova']);
+      $dt_prova = date('Y-m-d', strtotime($_POST['dt_prova']));
+      $hor_prova = mysqli_real_escape_string($conn, $_POST['hor_prova']);
 
-      $sql = "INSERT INTO exames (num_exame, cod_paciente, cod_usuario, dta_exame, pad_exame, pas_exame, gli_exame, col_exame) 
-              VALUES (NULL, '$cod_paciente', '$cod_usuario', curdate(), '$pad_exame', '$pas_exame', '$gli_exame', '$col_exame')";
+      $sql = "INSERT INTO provas (nom_prova, dt_prova, hor_prova) 
+              VALUES ('$nom_prova', '$dt_prova', '$hor_prova')";
 
       if($conn->query($sql) === TRUE) {
         ?>
@@ -29,11 +26,11 @@ if($_SESSION['logado'] == 1 && $_SESSION['sts_usuario'] == 1) {
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
           </svg> 
-          Exame cadastrado com sucesso!</h2>
+          Prova cadastrada com sucesso!</h2>
           clique no botão abaixo para atualizar a página e ver os resultados.
             </div>
             <?php
-            echo "<td><a href='main.php?p=exames/index.php' class='btn btn-secondary'>Atualizar</a></tr>";
+            echo "<td><a href='main.php?p=provas/index.php' class='btn btn-secondary'>Atualizar</a></tr>";
       }
       else {
         ?>
@@ -51,42 +48,25 @@ if($_SESSION['logado'] == 1 && $_SESSION['sts_usuario'] == 1) {
 ?>
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Novo exame</h1>
+    <h1 class="h2">Nova prova</h1>
 </div>
-<form action="main.php?p=exames/new.php" method="POST">
-  <div class="mb-3">
-    <label class="form-label">Número do exame</label>
-    <input type="text" class="form-control" disabled>
-    <div class="form-text">
-        O número do do exame é gerado automaticamente pelo sistema.
-    </div>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Código paciente</label>
-    <input type="text" class="form-control" id="cod_paciente" name="cod_paciente" maxlength="8">
-    <div class="form-text">
-        Em caso de dúvidas consultar na página de pacientes.
-    </div>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Pressão arterial diastólica</label>
-    <input type="text" class="form-control" id="pad_exame" name="pad_exame" maxlength="40">
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Pressão arterial sistólica</label>
-    <input type="text" class="form-control" id="pas_exame" name="pas_exame" maxlength="40">
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Glicemia</label>
-    <input type="text" class="form-control" id="gli_exame" name="gli_exame" maxlength="40">
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Colesterol</label>
-    <input type="text" class="form-control" id="col_exame" name="col_exame" maxlength="40">
-  </div>
-
+<form class="body row" action="main.php?p=provas/new.php" method="POST">
+<div class="col-md-6 mb-3">
+  <label for="nom_prova" class="form-label">Nome da prova</label>
+  <input type="text" required="" class="form-control" id="nom_prova" name="nom_prova" maxlength="30">
+</div>
+<div class="col-md-4 mb-3">
+  <label for="dt_prova" class="form-label">Data da prova</label>
+  <input type="date" required="" class="form-control" id="dt_prova" name="dt_prova">
+</div>
+<div class="col-md-2 mb-3">
+  <label for="hor_prova" class="form-label">Horário da prova</label>
+  <input type="text" required="" class="form-control" id="hor_prova" name="hor_prova" maxlength="5">
+</div>
+<div class="col-md-2 mb-3">
   <button type="submit" class="btn btn-success" name="enviar">Cadastrar</button>
-  <a class="btn btn-secondary" href="main.php?p=exames/index.php" role="button">Voltar</a>
+  <a class="btn btn-secondary" href="main.php?p=provas/index.php" role="button">Voltar</a>
+</div>
 </form>
 
 <?php 

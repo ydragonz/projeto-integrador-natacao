@@ -10,19 +10,16 @@ if($_SESSION['logado']) {
     }
 
     
-    //$sql = "SELECT * FROM exames ORDER BY num_exame";
-    $sql = "SELECT * FROM exames e 
-    INNER JOIN pacientes p ON e.cod_paciente=p.cod_paciente
-    INNER JOIN usuarios u ON e.cod_usuario=u.cod_usuario";
+    $sql = "SELECT * FROM provas ORDER BY dt_prova";
     $res = $conn->query($sql);
     ?>
 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Exames</h1>
+        <h1 class="h2">Provas</h1>
         <?php
-        if($_SESSION['sts_usuario']) {
+        if($_SESSION['sts_usuario'] && $_SESSION['per_usuario']) {
             ?>
-            <a href="main.php?p=exames/new.php" type="button" class="btn btn-success">Cadastrar</a>
+            <a href="main.php?p=provas/new.php" type="button" class="btn btn-success">Cadastrar</a>
             <?php
         }
         ?>
@@ -45,17 +42,12 @@ if($_SESSION['logado']) {
     if($res->num_rows>0){
         ?>
         <div class="table-responsive">
-            <table class="table table-striped table-sm" id="tabela_exames">
+            <table class="table table-striped table-sm" id="tabela_provas">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Paciente</th>
-                        <th>Cadastrado por</th>
-                        <th>Data exame</th>
-                        <th>P.A. diastolica</th>
-                        <th>P.A. sistolica</th>
-                        <th>Glicemia</th>
-                        <th>Colesterol</th>
+                        <th>Nome prova</th>
+                        <th>Data prova</th>
+                        <th>Hora prova</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -64,16 +56,11 @@ if($_SESSION['logado']) {
                     <?php
                     while($row = $res->fetch_assoc()){
                         echo "<tr>
-                            <td>".$row['num_exame']."</td>
-                            <td>".$row['nom_paciente']."</td>
-                            <td>".$row['nom_usuario']."</td>
-                            <td>".$row['dta_exame']."</td>
-                            <td>".$row['pad_exame']."</td>
-                            <td>".$row['pas_exame']."</td>
-                            <td>".$row['gli_exame']."</td>
-                            <td>".$row['col_exame']."</td>";
-                        if($_SESSION['sts_usuario']) {
-                            echo "<td><a href='main.php?p=exames/detalhes.php&id=".$row['num_exame']."' class='btn btn-secondary btn-sm'>Detalhes</a></td></tr>";
+                            <td>".$row['nom_prova']."</td>
+                            <td>".$row['dt_prova']."</td>
+                            <td>".$row['hor_prova']."</td>";
+                            if($_SESSION['sts_usuario'] && $_SESSION['per_usuario']) {
+                            echo "<td><a href='main.php?p=provas/detalhes.php&id=".$row['id_prova']."' class='btn btn-secondary btn-sm'>Detalhes</a></td></tr>";
                         }
                         else {
                             echo "<td></td></tr>";

@@ -59,6 +59,7 @@ if($_SESSION['logado']) {
             <table class="table table-striped table-sm" id="tabela_convenios">
                 <thead>
                     <tr>
+                    <th scope="col">Código</th>
                     <th scope="col">Nome</th>
                     <th></th>
                     </tr>
@@ -68,6 +69,7 @@ if($_SESSION['logado']) {
                     <?php
                     while($row = $res->fetch_assoc()){
                         echo "<tr>
+                            <td>".$row['id_convenio']."</td>
                             <td>".$row['nom_convenio']."</td>";
                         if($_SESSION['sts_usuario']) {
                             echo "<td><a href='main.php?p=convenios/edit.php&id=".$row['id_convenio']."' class='btn btn-primary btn-sm'>Editar</a>

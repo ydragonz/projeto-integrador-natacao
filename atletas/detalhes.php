@@ -9,7 +9,7 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
       else {
           if(isset($_GET['del'])) {
             $id = $_GET['del'];
-            $conn->query("DELETE FROM alunos WHERE id_aluno=$id");
+            $conn->query("DELETE FROM atletas WHERE id_atleta=$id");
             ?>
             <br>
             <div class="alert alert-success" role="alert">
@@ -17,16 +17,16 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
               </svg>
-              Aluno excluído com sucesso!</h2>
+              Atleta excluído com sucesso!</h2>
               clique no botão abaixo para atualizar a página e ver os resultados.
             </div>
             <?php
-            echo "<td><a href='main.php?p=alunos/index.php' class='btn btn-secondary'>Atualizar</a></tr>";
+            echo "<td><a href='main.php?p=atletas/index.php' class='btn btn-secondary'>Atualizar</a></tr>";
           }
 
           if(isset($_GET['id'])) {
             $id = $_GET['id'];
-            $sql = "SELECT * FROM alunos WHERE id_aluno = ?";
+            $sql = "SELECT * FROM atletas WHERE id_atleta = ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("s", $id);
             $stmt->execute();
@@ -37,10 +37,10 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
       if(!isset($_GET['del'])) {
   ?>
 
-  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-      <h1 class="h2">Visualizando alunos</h1>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">Visualizando atleta</h1>
   </div>
-  <form class="body row" action="main.php?p=alunos/detalhes.php" method="POST">
+  <form class="body row" action="main.php?p=atletas/detalhes.php" method="POST">
   <div class="col-md-6 mb-3">
     <label for="nom_atleta" class="form-label">Nome do atleta</label>
     <input type="text" required="" class="form-control" id="nom_atleta" name="nom_atleta" maxlength="50" value="<?=$dados[1];?>" readonly>
@@ -124,46 +124,31 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
     <label for="anx_cpf_atleta" class="form-label">CPF do atleta</label>
     <input type="file" class="form-control" id="anx_cpf_atleta" name="anx_cpf_atleta" value="<?=$dados[20];?>" readonly>
   </div>
-  <div class="col-md-6 mb-3">
+  <div class="col-md-4 mb-3">
     <label for="anx_atm_atleta" class="form-label">Atestado médico do atleta</label>
     <input type="file" class="form-control" id="anx_atm_atleta" name="anx_atm_atleta" value="<?=$dados[21];?>" readonly>
   </div>
-  <div class="col-md-6 mb-3">
+  <div class="col-md-4 mb-3">
     <label for="anx_cpr_atleta" class="form-label">Cpr do atleta</label>
     <input type="file" class="form-control" id="anx_cpr_atleta" name="anx_cpr_atleta" value="<?=$dados[22];?>" readonly>
   </div> 
   <div class="col-md-4 mb-3">
-  <label for="id_convenio" class="form-label">Convênio</label>
-    <select class="form-select" id="id_convenio" name="id_convenio" value="<?=$dados[23];?>" readonly>
-        
-    </select>
+    <label class="form-label">Código Convenio</label>
+    <input type="text" class="form-control" id="id_convenio" name="id_convenio" maxlength="8" value="<?=$dados[23];?>" readonly>
   </div>
   <div class="col-md-4 mb-3">
   <?php 
-    echo "<a href='main.php?p=alunos/edit.php&id=".$dados[0]."' class='btn btn-primary'>Editar</a>"; 
-    echo "<a href='main.php?p=alunos/detalhes.php&del=".$dados[0]."' class='btn btn-danger'>Excluir</a>";
+    echo "<a href='main.php?p=atletas/edit.php&id=".$dados[0]."' class='btn btn-primary'>Editar</a>"; 
+    echo "<a> ";
+    echo "<a href='main.php?p=atletas/detalhes.php&del=".$dados[0]."' class='btn btn-danger'>Excluir</a>";
     ?>
-    <a class="btn btn-secondary" href="main.php?p=alunos/index.php" role="button">Voltar</a>
+    <a class="btn btn-secondary" href="main.php?p=atletas/index.php" role="button">Voltar</a>
   </div>
   </form>
 
-<br>
-
-  else {
-    ?>
-    <div class="alert alert-warning d-flex align-items-center" role="alert">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
-        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-      </svg>
-      <div>
-        Não foram encontrados dados nesta tabela.
-      </div>
-    </div>
-    <?php
-  }
-  $conn->close();
-
+<?php 
   } 
+}
 else {
   ?>
   <div class="alert alert-danger" role="alert">
@@ -175,8 +160,6 @@ else {
     clique no botão abaixo para redirecionar para a página de login.
   </div>
   <?php
-  echo "<td><a href='logout.php' class='btn btn-secondary'>Área de login</a></tr>";
+  echo "<td><a href='index.php' class='btn btn-secondary'>Área de login</a></tr>";
 }
 ?>
-
-<br><br><br>

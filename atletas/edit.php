@@ -27,6 +27,12 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
             $pai_atleta = mysqli_real_escape_string($conn, $_POST['pai_atleta']);
             $clb_atleta = mysqli_real_escape_string($conn, $_POST['clb_atleta']);
             $trb_atleta = mysqli_real_escape_string($conn, $_POST['trb_atleta']);
+            $anx_foto_atleta = $_FILES['anx_foto_atleta'];
+            $anx_rg_atleta = $_FILES['anx_rg_atleta'];
+            $anx_cpf_atleta = $_FILES['anx_cpf_atleta'];
+            $anx_atm_atleta = $_FILES['anx_atm_atleta'];
+            $anx_cpr_atleta = $_FILES['anx_cpr_atleta'];
+            $id_convenio = mysqli_real_escape_string($conn, $_POST['id_convenio']);
 
             $sql = "UPDATE atletas SET 
             nom_atleta='$nom_atleta', 
@@ -45,7 +51,13 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
             mae_atleta='$mae_atleta',
             pai_atleta='$pai_atleta',
             clb_atleta='$clb_atleta',
-            trb_atleta='$trb_atleta'
+            trb_atleta='$trb_atleta',
+            anx_foto_atleta='$anx_foto_atleta',
+            anx_rg_atleta='$anx_rg_atleta',
+            anx_cpf_atleta='$anx_cpf_atleta',
+            anx_atm_atleta='$anx_atm_atleta',
+            anx_cpr_atleta='$anx_cpr_atleta',
+            id_convenio='$id_convenio',
             WHERE id_atleta = '$id_atleta'";
 
             if($conn->query($sql) === TRUE) {
@@ -60,7 +72,7 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
                 clique no botão abaixo para atualizar a página e ver os resultados.
               </div>
               <?php
-              echo "<td><a href='main.php?p=alunos/index.php' class='btn btn-secondary'>Atualizar</a></tr>";
+              echo "<td><a href='main.php?p=atletas/index.php' class='btn btn-secondary'>Atualizar</a></tr>";
             }
             else {
               ?>
@@ -92,11 +104,11 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
       <h1 class="h2">Editando atleta</h1>
   </div>
-  <form method="post" action="main.php?p=alunos/edit.php">
+  <form class="body row" method="post" action="main.php?p=atletas/edit.php">
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-      <h1 class="h2">Visualizando alunos</h1>
+      <h1 class="h2">Visualizando atletas</h1>
   </div>
-  <form class="body row" action="main.php?p=alunos/detalhes.php" method="POST">
+  <form class="body row" action="main.php?p=atletas/detalhes.php" method="POST">
   <div class="col-md-6 mb-3">
     <label for="nom_atleta" class="form-label">Nome do atleta</label>
     <input type="text" required="" class="form-control" id="nom_atleta" name="nom_atleta" maxlength="50" value="<?=$dados[1];?>">
@@ -180,23 +192,24 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
     <label for="anx_cpf_atleta" class="form-label">CPF do atleta</label>
     <input type="file" class="form-control" id="anx_cpf_atleta" name="anx_cpf_atleta" value="<?=$dados[20];?>">
   </div>
-  <div class="col-md-6 mb-3">
+  <div class="col-md-4 mb-3">
     <label for="anx_atm_atleta" class="form-label">Atestado médico do atleta</label>
     <input type="file" class="form-control" id="anx_atm_atleta" name="anx_atm_atleta" value="<?=$dados[21];?>">
   </div>
-  <div class="col-md-6 mb-3">
+  <div class="col-md-4 mb-3">
     <label for="anx_cpr_atleta" class="form-label">Cpr do atleta</label>
     <input type="file" class="form-control" id="anx_cpr_atleta" name="anx_cpr_atleta" value="<?=$dados[22];?>">
   </div> 
   <div class="col-md-4 mb-3">
-  <label for="id_convenio" class="form-label">Convênio</label>
-    <select class="form-select" id="id_convenio" name="id_convenio" value="<?=$dados[23];?>">
-        
-    </select>
+    <label class="form-label">Código Convenio</label>
+    <input type="text" class="form-control" id="id_convenio" name="id_convenio" maxlength="8" value="<?=$dados[23];?>">
+    <div class="form-text">
+        Em caso de dúvidas consultar na página de convênios.
+    </div>
   </div>
   <div class="col-md-4 mb-3">
   <button type="submit" class="btn btn-success">Salvar</button>
-  <?php echo "<td><a href='main.php?p=alunos/detalhes.php&id=".$dados[0]."' class='btn btn-secondary'>Cancelar</a></tr>" ?>
+  <?php echo "<td><a href='main.php?p=atletas/detalhes.php&id=".$dados[0]."' class='btn btn-secondary'>Cancelar</a></tr>" ?>
   </div>
   </form>
   <br><br><br>

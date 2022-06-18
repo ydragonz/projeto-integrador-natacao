@@ -11,7 +11,7 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
           $id_convenio = $_POST['id_convenio'];
           $nom_convenio = $_POST['nom_convenio'];
 
-          $sql = "UPDATE convenios SET nom_convenio = '$nom_convenio' WHERE id_convenio = '$id_convenio'";
+          $sql = "UPDATE convenios SET nom_convenio='$nom_convenio' WHERE id_convenio='$id_convenio'";
           if($conn->query($sql) === TRUE) {
             ?>
             <br>

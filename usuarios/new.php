@@ -82,8 +82,8 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario'] && $_SESSION['per_usuario']) 
     <div class="col-md-6 mb-3">
       <label for="per_usuario" class="form-label">Função</label>
       <select class="form-select" id="per_usuario" name="per_usuario">
-          <option selected value="0">Aluno</option>
-          <option value="1">Professor</option>
+          <option selected value="0">Usuário</option>
+          <option value="1">Administrador</option>
       </select>
     </div>
     <div class="col-md-6 mb-3">

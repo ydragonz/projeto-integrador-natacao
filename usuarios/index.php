@@ -62,10 +62,10 @@ if($_SESSION['logado'] == 1) {
                             $status="Inativo";
                         }
                         if($row['per_usuario']==1) {
-                            $funcao="Professor";
+                            $funcao="Administrador";
                         }
                         else {
-                            $funcao="Comum";
+                            $funcao="Usuário";
                         }
                         echo "<tr>
                             <td>".$row['nom_usuario']."</td>

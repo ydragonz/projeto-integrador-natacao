@@ -9,7 +9,7 @@ if($_SESSION['logado'] == 1) {
         die("Erro na conexão: ".$conn->connect_error);
     }
 
-    $sql = "SELECT * FROM atletas ORDER BY id_atleta";
+    $sql = "SELECT * FROM atletas a INNER JOIN convenios c ON a.id_convenio=c.id_convenio ORDER BY nom_atleta";
     $res = $conn->query($sql);
     ?>
 
@@ -18,7 +18,7 @@ if($_SESSION['logado'] == 1) {
         <?php
         if($_SESSION['sts_usuario']) {
         ?>
-        <a href="main.php?p=alunos/new.php" type="button" class="btn btn-success">Cadastrar</a>
+        <a href="main.php?p=atletas/new.php" type="button" class="btn btn-success">Cadastrar</a>
         <?php } ?>
     </div>
 
@@ -41,13 +41,14 @@ if($_SESSION['logado'] == 1) {
             <table class="table table-striped table-sm" id="tabela_atletas">
             <thead>
                     <tr>
+                    <th scope="col">Foto</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Sexo</th>
                     <th scope="col">Cidade</th>
                     <th scope="col">Estado</th>
                     <th scope="col">Data de nascimento</th>
-                    <th scope="col">Telefone</th>
-                    <th></th>
+                    <th scope="col">Data de inicio</th>
+                    <th scope="col">Convenio</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -63,14 +64,16 @@ if($_SESSION['logado'] == 1) {
                                 $sexo="Feminino";
                             }
                             echo "<tr>
+                                <th scope='row'><img width='100px' src='".$row['anx_foto_atleta']."'></th>
                                 <td>".$row['nom_atleta']."</td>
                                 <td>".$sexo."</td>
                                 <td>".$row['cid_atleta']."</td>
                                 <td>".$row['uf_atleta']."</td>
                                 <td>".$row['dtn_atleta']."</td>
-                                <td>".$row['fone_atleta']."</td>"; 
+                                <td>".$row['dti_atleta']."</td>
+                                <td>".$row['nom_convenio']."</td>"; 
                             if($_SESSION['sts_usuario']) {
-                                echo "<td><a href='main.php?p=alunos/detalhes.php&id=".$row['id_atleta']."' class='btn btn-secondary btn-sm'>Detalhes</a></td></tr>";
+                                echo "<td><a href='main.php?p=atletas/detalhes.php&id=".$row['id_atleta']."' class='btn btn-secondary btn-sm'>Detalhes</a></td></tr>";
                             }
                             else {
                                 echo "<td></td></tr>";
@@ -93,8 +96,9 @@ if($_SESSION['logado'] == 1) {
                                 <td>".$row['cid_atleta']."</td>
                                 <td>".$row['uf_atleta']."</td>
                                 <td>".$row['dtn_atleta']."</td>
-                                <td>".$row['fone_atleta']."</td>
-                                <td><a href='main.php?p=alunos/detalhes.php&id=".$row['id_atleta']."' class='btn btn-secondary btn-sm'>Detalhes</a></td></tr>"; 
+                                <td>".$row['dti_atleta']."</td>
+                                <td>".$row['nom_convenio']."</td>
+                                <td><a href='main.php?p=atletas/detalhes.php&id=".$row['id_atleta']."' class='btn btn-secondary btn-sm'>Detalhes</a></td></tr>"; 
                     }
                     
                     ?>

@@ -28,9 +28,15 @@ if($_SESSION['logado'] == 1 && $_SESSION['sts_usuario'] == 1) {
       $pai_atleta = mysqli_real_escape_string($conn, $_POST['pai_atleta']);
       $clb_atleta = mysqli_real_escape_string($conn, $_POST['clb_atleta']);
       $trb_atleta = mysqli_real_escape_string($conn, $_POST['trb_atleta']);
+      $anx_foto_atleta = $_FILES['anx_foto_atleta'];
+      $anx_rg_atleta = $_FILES['anx_rg_atleta'];
+      $anx_cpf_atleta = $_FILES['anx_cpf_atleta'];
+      $anx_atm_atleta = $_FILES['anx_atm_atleta'];
+      $anx_cpr_atleta = $_FILES['anx_cpr_atleta'];
+      $id_convenio = mysqli_real_escape_string($conn, $_POST['id_convenio']);
 
-      $sql = "INSERT INTO atletas (id_atleta, nom_atleta, dti_atleta, dtn_atleta, nat_atleta, nac_atleta, rg_atleta, cpf_atleta, sex_atleta, end_atleta, bai_atleta, cep_atleta, cid_atleta, uf_atleta, mae_atleta, pai_atleta, clb_atleta, trb_atleta) 
-              VALUES (NULL, '$nom_atleta', '$dti_atleta', '$dtn_atleta', '$nat_atleta', '$nac_atleta', '$rg_atleta', '$cpf_atleta', '$sex_atleta', '$end_atleta', '$bai_atleta', '$cep_atleta', '$cid_atleta', '$uf_atleta', '$mae_atleta', '$pai_atleta', '$clb_atleta', '$trb_atleta')";
+      $sql = "INSERT INTO atletas (id_atleta, nom_atleta, dti_atleta, dtn_atleta, nat_atleta, nac_atleta, rg_atleta, cpf_atleta, sex_atleta, end_atleta, bai_atleta, cep_atleta, cid_atleta, uf_atleta, mae_atleta, pai_atleta, clb_atleta, trb_atleta, anx_foto_atleta, anx_rg_atleta, anx_cpf_atleta, anx_atm_atleta, anx_cpr_atleta, id_convenio) 
+              VALUES (NULL, '$nom_atleta', '$dti_atleta', '$dtn_atleta', '$nat_atleta', '$nac_atleta', '$rg_atleta', '$cpf_atleta', '$sex_atleta', '$end_atleta', '$bai_atleta', '$cep_atleta', '$cid_atleta', '$uf_atleta', '$mae_atleta', '$pai_atleta', '$clb_atleta', '$trb_atleta', '$anx_foto_atleta', '$anx_rg_atleta', '$anx_cpf_atleta', '$anx_atm_atleta', '$anx_cpr_atleta', '$id_convenio')";
 
       if($conn->query($sql) === TRUE) {
         ?>
@@ -44,7 +50,7 @@ if($_SESSION['logado'] == 1 && $_SESSION['sts_usuario'] == 1) {
           clique no botão abaixo para atualizar a página e ver os resultados.
             </div>
             <?php
-            echo "<td><a href='main.php?p=alunos/index.php' class='btn btn-secondary'>Atualizar</a></tr>";
+            echo "<td><a href='main.php?p=atletas/index.php' class='btn btn-secondary'>Atualizar</a></tr>";
       }
       else {
         ?>
@@ -64,11 +70,11 @@ if($_SESSION['logado'] == 1 && $_SESSION['sts_usuario'] == 1) {
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Novo atleta</h1>
 </div>
-<form class="body row" action="main.php?p=alunos/new.php" method="POST">
+<form class="body row" action="main.php?p=atletas/new.php" method="POST">
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-      <h1 class="h2">Visualizando alunos</h1>
+      <h1 class="h2">Visualizando atletas</h1>
   </div>
-  <form class="body row" action="main.php?p=alunos/detalhes.php" method="POST">
+  <form class="body row" action="main.php?p=atletas/detalhes.php" method="POST">
   <div class="col-md-6 mb-3">
     <label for="nom_atleta" class="form-label">Nome do atleta</label>
     <input type="text" required="" class="form-control" id="nom_atleta" name="nom_atleta" maxlength="50">
@@ -161,14 +167,15 @@ if($_SESSION['logado'] == 1 && $_SESSION['sts_usuario'] == 1) {
     <input type="file" class="form-control" id="anx_cpr_atleta" name="anx_cpr_atleta">
   </div>
   <div class="col-md-4 mb-3">
-  <label for="id_convenio" class="form-label">Convênio</label>
-    <select class="form-select" id="id_convenio" name="id_convenio">
-        
-    </select>
+    <label class="form-label">Código Convenio</label>
+    <input type="text" class="form-control" id="id_convenio" name="id_convenio" maxlength="8">
+    <div class="form-text">
+        Em caso de dúvidas consultar na página de convênios.
+    </div>
   </div>
   <div class="col-md-6 mb-3">
   <button type="submit" class="btn btn-success" name="enviar">Cadastrar</button>
-  <a class="btn btn-secondary" href="main.php?p=alunos/index.php" role="button">Voltar</a>
+  <a class="btn btn-secondary" href="main.php?p=atletas/index.php" role="button">Voltar</a>
   <br><br>
   </div> 
 </form>

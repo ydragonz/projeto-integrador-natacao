@@ -3,12 +3,19 @@ USE natacaounaerp;
 
 CREATE TABLE usuarios (
     cod_usuario INT(6) AUTO_INCREMENT, 
-    nom_usuario VARCHAR(40) NOT NULL, 
+    nom_usuario VARCHAR(60) NOT NULL, 
     dtn_usuario DATE NOT NULL, 
+    log_usuario VARCHAR(60) NOT NULL, 
     sen_usuario VARCHAR(32) NOT NULL, 
     per_usuario TINYINT(1) NOT NULL, 
     sts_usuario TINYINT(1) NOT NULL,
     PRIMARY KEY(cod_usuario)
+);
+
+CREATE TABLE convenios (
+	id_convenio INT(6) auto_increment,
+    nom_convenio varchar(20),
+    PRIMARY KEY(id_convenio)
 );
 
 CREATE TABLE atletas (
@@ -37,6 +44,14 @@ CREATE TABLE atletas (
     anx_cpr_atleta blob,
 	id_convenio INT(6),
     primary key(id_atleta)
+);
+
+create table provas (
+	id_prova int(6) auto_increment,
+    nom_prova varchar(30) not null, 
+    dt_prova date not null,
+    hor_prova varchar(5),
+    primary key(id_prova)
 );
 
 ALTER TABLE atletas ADD CONSTRAINT FOREIGN KEY (id_convenio) REFERENCES convenios(id_convenio);

@@ -9,7 +9,7 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
       else {
           if(isset($_GET['del'])) {
             $id = $_GET['del'];
-            $conn->query("DELETE FROM exames WHERE num_exame=$id");
+            $conn->query("DELETE FROM provas WHERE id_prova=$id");
             ?>
             <br>
             <div class="alert alert-success" role="alert">
@@ -17,16 +17,16 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
               </svg>
-              Exame excluído com sucesso!</h2>
+              Prova excluído com sucesso!</h2>
               clique no botão abaixo para atualizar a página e ver os resultados.
             </div>
             <?php
-            echo "<td><a href='main.php?p=exames/index.php' class='btn btn-secondary'>Atualizar</a></tr>";
+            echo "<td><a href='main.php?p=provas/index.php' class='btn btn-secondary'>Atualizar</a></tr>";
           }
 
           if(isset($_GET['id'])) {
             $id = $_GET['id'];
-            $sql = "SELECT * FROM exames WHERE num_exame = ?";
+            $sql = "SELECT * FROM provas WHERE id_prova = ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("s", $id);
             $stmt->execute();
@@ -38,50 +38,30 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
   ?>
 
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-      <h1 class="h2">Visualizando exame</h1>
+      <h1 class="h2">Visualizando prova</h1>
   </div>
-  <form action="main.php?p=exames/detalhes.php" method="POST">
-  <div class="mb-3">
-    <label class="form-label">Número do exame</label>
-    <input type="text" class="form-control" id="num_exame" name="num_exame" value="<?=$dados[0];?>" readonly>
-    <div class="form-text">
-        O número do do exame é gerado automaticamente pelo sistema.
-    </div>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Código paciente</label>
-    <input type="text" class="form-control" id="cod_paciente" name="cod_paciente" value="<?=$dados[1];?>" readonly>
-    <div class="form-text">
-        Em caso de dúvidas consultar a tabela na página de pacientes.
-    </div>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Código usuário</label>
-    <input type="text" class="form-control" id="cod_usuario" name="cod_usuario" value="<?=$dados[2];?>" readonly>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Data do exame</label>
-    <input type="date" class="form-control" id="dta_exame" name="dta_exame" value="<?=$dados[3];?>" readonly>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Pressão arterial diastólica</label>
-    <input type="text" class="form-control" id="pad_exame" name="pad_exame" value="<?=$dados[4];?>" readonly>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Pressão arterial sistólica</label>
-    <input type="text" class="form-control" id="pas_exame" name="pas_exame" value="<?=$dados[5];?>" readonly>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Glicemia</label>
-    <input type="text" class="form-control" id="gli_exame" name="gli_exame" value="<?=$dados[6];?>" readonly>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Colesterol</label>
-    <input type="text" class="form-control" id="col_exame" name="col_exame" value="<?=$dados[7];?>" readonly>
-  </div>
-
-    <a class="btn btn-secondary" href="main.php?p=exames/index.php" role="button">Voltar</a>
-  </form>
+  <form class="body row" action="main.php?p=provas/new.php" method="POST">
+<div class="col-md-6 mb-3">
+  <label for="nom_prova" class="form-label">Nome da prova</label>
+  <input type="text" required="" class="form-control" id="nom_prova" name="nom_prova" maxlength="30" value="<?=$dados[1];?>" readonly>
+</div>
+<div class="col-md-4 mb-3">
+  <label for="dt_prova" class="form-label">Data da prova</label>
+  <input type="date" required="" class="form-control" id="dt_prova" name="dt_prova" value="<?=$dados[2];?>" readonly>
+</div>
+<div class="col-md-2 mb-3">
+  <label for="hor_prova" class="form-label">Horário da prova</label>
+  <input type="text" required="" class="form-control" id="hor_prova" name="hor_prova" maxlength="5" value="<?=$dados[3];?>" readonly>
+</div>
+<div class="col-md-2 mb-3">
+<?php 
+    if($_SESSION['per_usuario'] && $_SESSION['sts_usuario']) {
+      echo "<a href='main.php?p=provas/detalhes.php&del=".$dados[0]."' class='btn btn-danger'>Excluir</a>";
+    }
+    ?>
+  <a class="btn btn-secondary" href="main.php?p=provas/index.php" role="button">Voltar</a>
+</div>
+</form>
 
 <br>
 <?php
