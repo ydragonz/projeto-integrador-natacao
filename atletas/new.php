@@ -168,7 +168,7 @@ if($_SESSION['logado'] == 1 && $_SESSION['sts_usuario'] == 1) {
   </div>
   <div class="col-md-4 mb-3">
     <label class="form-label">Código Convenio</label>
-    <input type="text" class="form-control" id="id_convenio" name="id_convenio" maxlength="8">
+    <input type="text" required="" class="form-control" id="id_convenio" name="id_convenio" maxlength="8">
     <div class="form-text">
         Em caso de dúvidas consultar na página de convênios.
     </div>

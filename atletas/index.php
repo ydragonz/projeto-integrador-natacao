@@ -41,14 +41,14 @@ if($_SESSION['logado'] == 1) {
             <table class="table table-striped table-sm" id="tabela_atletas">
             <thead>
                     <tr>
-                    <th scope="col">Foto</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Sexo</th>
                     <th scope="col">Cidade</th>
                     <th scope="col">Estado</th>
                     <th scope="col">Data de nascimento</th>
                     <th scope="col">Data de inicio</th>
-                    <th scope="col">Convenio</th>
+                    <th scope="col">Convênio</th>
+                    <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -64,7 +64,6 @@ if($_SESSION['logado'] == 1) {
                                 $sexo="Feminino";
                             }
                             echo "<tr>
-                                <th scope='row'><img width='100px' src='".$row['anx_foto_atleta']."'></th>
                                 <td>".$row['nom_atleta']."</td>
                                 <td>".$sexo."</td>
                                 <td>".$row['cid_atleta']."</td>
@@ -91,13 +90,13 @@ if($_SESSION['logado'] == 1) {
                                 $sexo="Feminino";
                             }
                         echo "<tr>
+                                <td>".$row['id_atleta']."</td>
                                 <td>".$row['nom_atleta']."</td>
                                 <td>".$sexo."</td>
                                 <td>".$row['cid_atleta']."</td>
                                 <td>".$row['uf_atleta']."</td>
                                 <td>".$row['dtn_atleta']."</td>
-                                <td>".$row['dti_atleta']."</td>
-                                <td>".$row['nom_convenio']."</td>
+                                <td>".$row['fone_atleta']."</td>
                                 <td><a href='main.php?p=atletas/detalhes.php&id=".$row['id_atleta']."' class='btn btn-secondary btn-sm'>Detalhes</a></td></tr>"; 
                     }
                     
