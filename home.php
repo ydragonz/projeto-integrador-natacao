@@ -3,5 +3,5 @@
 </div>
 <p class="fs-6">Sistema de gerenciamento de atletas da natação da UNAERP.</p>
 
-<!-- <img src="imagens/stock_measuring_preasure_image.jpg" class="img-fluid rounded border border-4 border-dark" alt="Imagem de uma doutora medindo a pressão de um paciente.">
-<mark>Photo by <b>Pavel Danilyuk</b> from <b>Pexels</b></mark> -->
+<img src="imagens/natacao.jpg" class="img-fluid rounded border border-4 border-dark" alt="Imagem de uma piscina de natação.">
+<mark>Photo by <b>Jim de Ramos</b> from <b>Pexels</b></mark>
