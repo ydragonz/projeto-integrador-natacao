@@ -144,7 +144,7 @@ if($_SESSION['logado'] == 1 && $_SESSION['sts_usuario'] == 1) {
   </div>
   <div class="col-md-2 mb-3">
     <label for="trb_atleta" class="form-label">Trb do atleta</label>
-    <input type="text" class="form-control" id="trb_atleta" name="trb_atleta" maxlength="2">
+    <input type="text" class="form-control" id="trb_atleta" name="trb_atleta" maxlength="1">
   </div>
   <div class="col-md-4 mb-3">
     <label for="anx_foto_atleta" class="form-label">Foto do atleta</label>
