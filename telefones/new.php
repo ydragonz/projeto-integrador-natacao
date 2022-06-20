@@ -9,10 +9,12 @@ if($_SESSION['logado'] == 1 && $_SESSION['sts_usuario'] == 1) {
       die("Erro de conexão: ".$conn->connect_error);
     }
     else {
-      $nom_alergia = mysqli_real_escape_string($conn, $_POST['nom_alergia']);
-      $id_atleta = mysqli_real_escape_string($conn, $_POST['id_atleta']);
+        $ddd_telefone = mysqli_real_escape_string($conn, $_POST['ddd_telefone']);
+        $tip_telefone = mysqli_real_escape_string($conn, $_POST['tip_telefone']);
+        $num_telefone = mysqli_real_escape_string($conn, $_POST['num_telefone']);
+        $id_atleta = mysqli_real_escape_string($conn, $_POST['id_atleta']);
 
-      $sql = "INSERT INTO alergias (nom_alergia, id_atleta) VALUES ('$nom_alergia', '$id_atleta')";
+      $sql = "INSERT INTO telefones (tip_telefone, ddd_telefone, num_telefone, id_atleta) VALUES ('$tip_telefone', '$ddd_telefone', '$num_telefone', '$id_atleta')";
       if($conn->query($sql) === TRUE) {
         ?>
         <br>
@@ -21,11 +23,11 @@ if($_SESSION['logado'] == 1 && $_SESSION['sts_usuario'] == 1) {
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
           </svg>  
-          Alergia cadastrada com sucesso!</h2>
+          Telefone cadastrado com sucesso!</h2>
           clique no botão abaixo para atualizar a página e ver os resultados.
         </div>
         <?php
-        echo "<td><a href='main.php?p=alergias/index.php' class='btn btn-secondary'>Atualizar</a></tr>";
+        echo "<td><a href='main.php?p=telefones/index.php' class='btn btn-secondary'>Atualizar</a></tr>";
       }
       else {
         ?>
@@ -42,24 +44,35 @@ if($_SESSION['logado'] == 1 && $_SESSION['sts_usuario'] == 1) {
 ?>
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Nova alergia</h1>
+    <h1 class="h2">Novo telefone</h1>
 </div>
-<form class="body row" action="main.php?p=alergias/new.php" method="post">
-  <div class="col-md-10 mb-3">
-    <label for="nom_alergia" class="form-label">Nome da alergia</label>
-    <input type="text" class="form-control" id="nom_alergia" name="nom_alergia" maxlength="30">
-  </div>
-  <div class="col-md-2 mb-3">
-    <label for="id_atleta" class="form-label">ID do atleta</label>
-    <input required="" type="text" class="form-control" id="id_atleta" name="id_atleta" maxlength="6">
+<form class="body row" action="main.php?p=telefones/new.php" method="post">
+    <div class="col-md-4 mb-3">
+      <label for="tip_telefone" class="form-label">Tipo de contato</label>
+      <select required="" class="form-select" id="tip_telefone" name="tip_telefone">
+          <option selected value="0">Telefone</option>
+          <option value="1">Celular</option>
+      </select>
+    </div>
+    <div class="col-md-2 mb-3">
+      <label for="ddd_telefone" class="form-label">DDD</label>
+      <input type="text" required="" class="form-control" id="ddd_telefone" name="ddd_telefone" maxlength="3">
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="num_telefone" class="form-label">Número</label>
+      <input type="text" required="" class="form-control" id="num_telefone" name="num_telefone" maxlength="12">
+    </div>
+    <div class="col-md-2 mb-3">
+        <label for="id_atleta" class="form-label">ID do atleta</label>
+        <input required="" type="text" class="form-control" id="id_atleta" name="id_atleta" maxlength="6">
     <div class="form-text">
         Em caso de dúvidas consultar na página de atletas.
     </div>
-  </div>
-  <div class="col-md-12 mb-3">
-    <button type="submit" class="btn btn-success" name="enviar">Cadastrar</button>
-    <a class="btn btn-secondary" href="main.php?p=alergias/index.php" role="button">Voltar</a>
-  </div>
+    </div>
+    <div class="col-md-12 mb-3">
+        <button type="submit" class="btn btn-success" name="enviar">Cadastrar</button>
+        <a class="btn btn-secondary" href="main.php?p=telefones/index.php" role="button">Voltar</a>
+    </div>
 </form>
 
 <?php
