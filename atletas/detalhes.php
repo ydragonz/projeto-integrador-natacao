@@ -71,10 +71,7 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
   </div>
   <div class="col-md-2 mb-3">
   <label for="sex_atleta" class="form-label">Sexo</label>
-    <select class="form-select" id="sex_atleta" name="sex_atleta" value="<?=$dados[8];?>" readonly>
-        <option value="M">M</option>
-        <option value="F">F</option>
-    </select>
+    <input type="text" required="" class="form-control" id="sex_atleta" name="sex_atleta" maxlength="11" value="<?=$dados[8];?>" readonly>
   </div>
   <div class="col-md-8 mb-3">
     <label for="end_atleta" class="form-label">Endereço</label>

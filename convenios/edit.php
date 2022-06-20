@@ -54,6 +54,8 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
     <h1 class="h2">Editando convenio</h1>
 </div>
 <form action="main.php?p=convenios/edit.php" method="POST">
+
+
   
     <div class="mb-3">
       <label for="nom_convenio" class="form-label">Nome convenio</label>
@@ -62,6 +64,14 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
 
   <button type="submit" name="submit" class="btn btn-success">Salvar</button>
   <a class="btn btn-secondary" href="main.php?p=convenios/index.php" role="button">Cancelar</a>
+
+  <div class="mb-3 controle_id">
+        <label class="form-label">ID curso</label>
+        <input type="text" class="form-control" name="id_convenio" id="id_convenio" value="<?=$dados[0];?>" readonly>
+        <div id="helpIdCurso" class="form-text">
+            O ID do curso é gerado automaticamente pelo sistema.
+        </div>
+    </div>
   </form>
 
 <?php 

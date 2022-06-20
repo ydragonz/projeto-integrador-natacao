@@ -57,7 +57,7 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
             anx_cpf_atleta='$anx_cpf_atleta',
             anx_atm_atleta='$anx_atm_atleta',
             anx_cpr_atleta='$anx_cpr_atleta',
-            id_convenio='$id_convenio',
+            id_convenio='$id_convenio'
             WHERE id_atleta = '$id_atleta'";
 
             if($conn->query($sql) === TRUE) {
@@ -178,7 +178,7 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
   </div>
   <div class="col-md-2 mb-3">
     <label for="trb_atleta" class="form-label">Trb do atleta</label>
-    <input type="text" class="form-control" id="trb_atleta" name="trb_atleta" maxlength="2" value="<?=$dados[17];?>">
+    <input type="text" class="form-control" id="trb_atleta" name="trb_atleta" maxlength="1" value="<?=$dados[17];?>">
   </div>
   <div class="col-md-4 mb-3">
     <label for="anx_foto_atleta" class="form-label">Foto do atleta</label>
@@ -210,6 +210,13 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
   <div class="col-md-4 mb-3">
   <button type="submit" class="btn btn-success">Salvar</button>
   <?php echo "<td><a href='main.php?p=atletas/detalhes.php&id=".$dados[0]."' class='btn btn-secondary'>Cancelar</a></tr>" ?>
+  </div>
+  <div class="mb-3 controle_id">
+      <label class="form-label">ID atleta</label>
+      <input type="text" class="form-control" name="id_atleta" id="id_atleta" value="<?=$dados[0];?>" readonly>
+      <div id="helpIdCurso" class="form-text">
+          O ID do curso é gerado automaticamente pelo sistema.
+      </div>
   </div>
   </form>
   <br><br><br>

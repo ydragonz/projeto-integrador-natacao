@@ -59,17 +59,27 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
     </div>
     <div class="col-md-6 mb-3">
       <label for="per_usuario" class="form-label">Função</label>
-      <select class="form-select" id="per_usuario" name="per_usuario" value="<?=$dados[5];?>" readonly>
-          <option selected value="0">Usuário</option>
-          <option value="1">Administrador</option>
-      </select>
+      <?php
+        $funcao = "";
+        if ($dados[5] == 1){
+          $funcao = "Administador";
+        }else {
+          $funcao = "Usuário";
+        }
+      ?>
+      <input type="text" required="" class="form-control" id="per_usuario" name="per_usuario" maxlength="11" value="<?=$funcao;?>" readonly>
     </div>
     <div class="col-md-6 mb-3">
       <label for="sts_usuario" class="form-label">Status</label>
-      <select class="form-select" id="sts_usuario" name="sts_usuario" value="<?=$dados[6];?>" readonly>
-          <option selected value="0">Inativo</option>
-          <option value="1">Ativo</option>
-      </select>
+      <?php
+        $status = "";
+        if ($dados[6] == 1){
+          $status = "Ativo";
+        }else {
+          $status = "Inativo";
+        }
+      ?>
+      <input type="text" required="" class="form-control" id="sts_usuario" name="sts_usuario" maxlength="11" value="<?=$status;?>" readonly>
     </div>
     <div class="col-md-6 mb-3">
     <?php 

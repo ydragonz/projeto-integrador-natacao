@@ -24,6 +24,8 @@ body {
     z-index: 100; /* Behind the navbar */
     padding: 48px 0 0; /* Height of navbar */
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+    
+
   }
   
   @media (max-width: 767.98px) {
@@ -98,3 +100,36 @@ body {
     border-color: transparent;
     box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
   }
+
+  .controle_id {
+    visibility: hidden;
+  }
+
+  .edit_test{
+    float: right;
+  }
+
+  table.dataTable td {
+    padding: 3px 50px;
+  }
+
+  #sidebarMenu {
+    background-color: #032565;
+  }
+
+  #sidebarMenu a:hover {
+
+    background-color: #0C77AF;
+
+  }
+
+
+header {
+  background-color: #032565;
+  
+}
+
+header .sair:hover {
+  color: white;
+  font-weight: bold;
+}

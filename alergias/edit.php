@@ -54,7 +54,7 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Editando alergia</h1>
 </div>
-<form class="body row" action="main.php?p=alergias/new.php" method="post">
+<form class="body row" action="main.php?p=alergias/edit.php" method="post">
   <div class="col-md-10 mb-3">
     <label for="nom_alergia" class="form-label">Nome da alergia</label>
     <input type="text" class="form-control" id="nom_alergia" name="nom_alergia" maxlength="30" value="<?=$dados[1];?>">
@@ -69,6 +69,13 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
   <div class="col-md-12 mb-3">
     <button type="submit" name="submit" class="btn btn-success">Salvar</button>
     <a class="btn btn-secondary" href="main.php?p=alergias/index.php" role="button">Cancelar</a>
+  </div>
+  <div class="mb-3 controle_id">
+      <label class="form-label">ID atleta</label>
+      <input type="text" class="form-control" name="id_alergia" id="id_alegia" value="<?=$dados[0];?>" readonly>
+      <div id="helpIdCurso" class="form-text">
+          O ID do curso é gerado automaticamente pelo sistema.
+      </div>
   </div>
   </form>
 

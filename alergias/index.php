@@ -72,7 +72,7 @@ if($_SESSION['logado']) {
                             <td>".$row['nom_atleta']."</td>
                             <td>".$row['nom_alergia']."</td>";
                         if($_SESSION['sts_usuario']) {
-                            echo "<td><a href='main.php?p=alergias/edit.php&id=".$row['id_alergia']."' class='btn btn-primary btn-sm'>Editar</a>
+                            echo "<td class='edit_test'><a href='main.php?p=alergias/edit.php&id=".$row['id_alergia']."' class='btn btn-primary btn-sm'>Editar</a>
                                 <a href='main.php?p=alergias/index.php&del=".$row['id_alergia']."' class='btn btn-danger btn-sm'>Excluir</a></td></tr>";
                         }
                         else {

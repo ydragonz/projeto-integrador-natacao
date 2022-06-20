@@ -103,6 +103,13 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario'] && $_SESSION['per_usuario']) 
     <button type="submit" class="btn btn-success">Salvar</button>
     <?php echo "<td><a href='main.php?p=usuarios/detalhes.php&id=".$dados[0]."' class='btn btn-secondary'>Cancelar</a></tr>" ?>
     </div>
+    <div class="mb-3 controle_id">
+      
+      <label class="form-label">ID curso</label>
+      <input type="text" class="form-control" name="cod_usuario" id="cod_usuario" value="<?=$dados[0];?>" readonly>
+      <div id="helpIdCurso" class="form-text">
+          O ID do curso é gerado automaticamente pelo sistema.
+      </div>
   </form>
 <?php 
     } 
