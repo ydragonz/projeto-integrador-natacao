@@ -55,12 +55,22 @@ if($_SESSION['logado']) {
                 <tbody> 
 
                     <?php
+                
                     while($row = $res->fetch_assoc()){
+                        $data = $row['dtt_emprego'];
+
+                        if($data == '1970-01-01' || $data == NULL){
+                            $data = 'Ainda está ativo';
+                        }
+                        else {
+                            $data = $row['dtt_emprego'];
+                        }
+    
                         echo "<tr>
                             <td>".$row['nom_atleta']."</td>
                             <td>".$row['nom_empresa']."</td>
                             <td>".$row['dti_emprego']."</td>
-                            <td>".$row['dtt_emprego']."</td>";
+                            <td>".$data."</td>";
                             if($_SESSION['sts_usuario'] && $_SESSION['per_usuario']) {
                             echo "<td><a href='main.php?p=empregos/detalhes.php&id=".$row['id_emprego']."' class='btn btn-secondary btn-sm'>Detalhes</a></td></tr>";
                         }

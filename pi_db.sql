@@ -62,8 +62,8 @@ create table alergias (
 );
 
 create table empregos (
-	id_emprego int(6) auto_increment,
-    nom_empresa varchar(40),
+	id_emprego int(6) auto_increment not null,
+    nom_empresa varchar(40) not null,
     dti_emprego date not null,
     dtt_emprego date,
     id_atleta int(6) not null,

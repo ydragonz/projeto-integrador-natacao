@@ -37,6 +37,8 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
       if(!isset($_GET['del'])) {
   ?>
 
+
+
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
       <h1 class="h2">Visualizando emprego</h1>
   </div>
@@ -51,7 +53,23 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
     </div>
     <div class="col-md-3 mb-3">
       <label for="dtt_emprego" class="form-label">Data de término</label>
-          <input type="date" class="form-control" id="dtt_emprego" name="dtt_emprego" value="<?=$dados[3];?>" readonly>
+      <?php
+          $data = $dados[3];
+
+          if($data == '1970-01-01' || $data == NULL){
+              $data = 'Ainda está ativo';
+              ?>
+              <input type="text" class="form-control" id="dtt_emprego" name="dtt_emprego" value="<?=$data;?>" readonly>
+              <?php
+          }
+          else {
+
+              $data = $dados[3];
+            ?>
+              <input type="date" class="form-control" id="dtt_emprego" name="dtt_emprego" value="<?=$data;?>" readonly>
+              <?php
+          }
+      ?>
     </div>
     <div class="col-md-1 mb-3">
       <label for="id_atleta" class="form-label">ID do atleta</label>
