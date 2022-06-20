@@ -1,8 +1,5 @@
 <div class="position-sticky pt-3">
     <ul class="nav flex-column">
-    <?php
-        if($_SESSION['sts_usuario'] && $_SESSION['per_usuario']) {
-        ?>
         <li class="nav-item">
             <br>
             <a class="nav-link active text-white" aria-current="page" href="main.php">
@@ -13,6 +10,9 @@
             Início
             </a>
         </li>
+        <?php
+        if($_SESSION['sts_usuario'] && $_SESSION['per_usuario']) {
+        ?>
         <li class="nav-item">
             <a class="nav-link text-white" href="?p=usuarios/index.php">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-badge" viewBox="0 0 16 16">
