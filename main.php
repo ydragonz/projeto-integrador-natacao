@@ -93,6 +93,8 @@ $(document).ready( function () {
     $('#tabela_convenios').DataTable();
     $('#tabela_provas').DataTable();
     $('#tabela_alergias').DataTable();
+    $('#tabela_telefones').DataTable();
+    $('#tabela_empregos').DataTable();
 } );
 </script>
 
