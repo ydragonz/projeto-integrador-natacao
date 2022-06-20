@@ -92,6 +92,7 @@ $(document).ready( function () {
     $('#tabela_atletas').DataTable();
     $('#tabela_convenios').DataTable();
     $('#tabela_provas').DataTable();
+    $('#tabela_alergias').DataTable();
 } );
 </script>
 

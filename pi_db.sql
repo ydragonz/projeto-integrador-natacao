@@ -54,4 +54,32 @@ create table provas (
     primary key(id_prova)
 );
 
+create table alergias (
+	id_alergia int(6) auto_increment,
+    nom_alergia varchar(30) not null,
+    id_atleta int(6) not null,
+    primary key(id_alergia)
+);
+
+create table empregos (
+	id_emprego int(6) auto_increment,
+    nom_empresa varchar(40),
+    dti_emprego date not null,
+    dtt_emprego date,
+    id_atleta int(6) not null,
+    primary key(id_emprego)
+);
+
+create table telefones (
+	id_telefone int(6) not null,
+    tip_telefone varchar(10) not null,
+    ddd_telefone int(3) not null,
+    num_telefone varchar(12) not null,
+    id_atleta int(6) not null,
+    primary key(id_telefone)
+);
+
 ALTER TABLE atletas ADD CONSTRAINT FOREIGN KEY (id_convenio) REFERENCES convenios(id_convenio);
+ALTER TABLE alergias ADD CONSTRAINT FOREIGN KEY (id_atleta) REFERENCES atletas(id_atleta);
+ALTER TABLE empregos ADD CONSTRAINT FOREIGN KEY (id_atleta) REFERENCES atletas(id_atleta);
+ALTER TABLE telefones ADD CONSTRAINT FOREIGN KEY (id_atleta) REFERENCES atletas(id_atleta);

@@ -41,6 +41,7 @@ if($_SESSION['logado'] == 1) {
             <table class="table table-striped table-sm" id="tabela_atletas">
             <thead>
                     <tr>
+                    <th scope="col">ID</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Sexo</th>
                     <th scope="col">Cidade</th>
@@ -64,6 +65,7 @@ if($_SESSION['logado'] == 1) {
                                 $sexo="Feminino";
                             }
                             echo "<tr>
+                                <td>".$row['id_atleta']."</td>
                                 <td>".$row['nom_atleta']."</td>
                                 <td>".$sexo."</td>
                                 <td>".$row['cid_atleta']."</td>
