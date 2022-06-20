@@ -30,7 +30,16 @@ if(isset($_POST['login_enviar'])) {
         $_SESSION['cod_usuario'] = $dados['cod_usuario'];
         $_SESSION['per_usuario'] = $dados['per_usuario'];
         $_SESSION['sts_usuario'] = $dados['sts_usuario'];
-        header('Location: main.php');
+        if( $_SESSION['sts_usuario'] == 1) {
+          header('Location: main.php');
+        } else {
+          ?>
+          <div class="alert alert-danger" role="alert">
+            <h1>Usuário e/ou senha inválidos!</h1>
+            verifique e tente novamente, contate um administrador caso o problema persista.
+          </div>
+          <?php
+        }
       }
       else {
         ?>
