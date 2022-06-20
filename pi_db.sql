@@ -71,7 +71,7 @@ create table empregos (
 );
 
 create table telefones (
-	id_telefone int(6) not null auto_increment,
+	id_telefone int(6) auto_increment,
 	tip_telefone tinyint(1) not null,
     ddd_telefone int(3) not null,
     num_telefone varchar(12) not null,
