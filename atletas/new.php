@@ -32,6 +32,8 @@ if($_SESSION['logado'] == 1 && $_SESSION['sts_usuario'] == 1) {
 
       $pasta = "arquivos/";
 
+      /* Codigo para exibir foto
+      
       if(is_dir($pasta) ) {
         if($open = opendir($pasta)) {
           while(($file = readdir($open)) != false) {
@@ -40,14 +42,16 @@ if($_SESSION['logado'] == 1 && $_SESSION['sts_usuario'] == 1) {
           }
         }
         closedir($open);
-      }
+      }*/
       
       $anx_foto_atleta = $_FILES['anx_foto_atleta'];
       $nome_arquivo_foto = $anx_foto_atleta['name'];
       $novo_nome_foto = uniqid();
       $extensao_foto = strtolower(pathinfo($nome_arquivo_foto, PATHINFO_EXTENSION));
 
-      /*if($extensao_foto != ".jpg" || $extensao_foto != ".png") {
+      /* Codigo para verificar se o tipo do arquivo eh aceito
+      
+      if($extensao_foto != ".jpg" || $extensao_foto != ".png") {
         die("Tipo de arquivo não aceito");
       }*/
 

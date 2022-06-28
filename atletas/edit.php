@@ -27,11 +27,80 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
             $pai_atleta = mysqli_real_escape_string($conn, $_POST['pai_atleta']);
             $clb_atleta = mysqli_real_escape_string($conn, $_POST['clb_atleta']);
             $trb_atleta = mysqli_real_escape_string($conn, $_POST['trb_atleta']);
-            $anx_foto_atleta = $_FILES['anx_foto_atleta'];
-            $anx_rg_atleta = $_FILES['anx_rg_atleta'];
-            $anx_cpf_atleta = $_FILES['anx_cpf_atleta'];
-            $anx_atm_atleta = $_FILES['anx_atm_atleta'];
-            $anx_cpr_atleta = $_FILES['anx_cpr_atleta'];
+
+            $pasta = "arquivos/";
+
+            $id = mysqli_real_escape_string($conn, $_POST['id_atleta']);
+            $sql = "SELECT id_atleta, anx_foto_atleta, anx_rg_atleta, anx_cpf_atleta, anx_atm_atleta, anx_cpr_atleta  FROM atletas WHERE id_atleta = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("s", $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+              
+            $dados = $result->fetch_row();
+
+            
+            if(is_uploaded_file($_FILES['anx_foto_atleta']["tmp_name"])) {
+              $anx_foto_atleta = $_FILES['anx_foto_atleta'];
+              $nome_arquivo_foto = $anx_foto_atleta['name'];
+              $novo_nome_foto = uniqid();
+              $extensao_foto = strtolower(pathinfo($nome_arquivo_foto, PATHINFO_EXTENSION));
+  
+              move_uploaded_file($anx_foto_atleta["tmp_name"], $pasta . $novo_nome_foto . "." . $extensao_foto);
+            } else {
+              $novo_nome_foto = $dados[1];
+              
+            }
+            
+            
+            if(is_uploaded_file($_FILES['anx_rg_atleta']["tmp_name"])) {
+              $anx_rg_atleta = $_FILES['anx_rg_atleta'];
+              $nome_arquivo_rg = $anx_rg_atleta['name'];
+              $novo_nome_rg = uniqid();
+              $extensao_rg = strtolower(pathinfo($nome_arquivo_rg, PATHINFO_EXTENSION));
+
+              move_uploaded_file($anx_rg_atleta["tmp_name"], $pasta . $novo_nome_rg . "." . $extensao_rg);
+            } else {
+              $novo_nome_rg = $dados[2];
+            }
+            
+
+            if(is_uploaded_file($_FILES['anx_cpf_atleta']["tmp_name"])) {
+              $anx_cpf_atleta = $_FILES['anx_cpf_atleta'];
+              $nome_arquivo_cpf = $anx_cpf_atleta['name'];
+              $novo_nome_cpf = uniqid();
+              $extensao_cpf = strtolower(pathinfo($nome_arquivo_cpf, PATHINFO_EXTENSION));
+
+              move_uploaded_file($anx_cpf_atleta["tmp_name"], $pasta . $novo_nome_cpf . "." . $extensao_cpf);
+            } else {
+              $novo_nome_cpf = $dados[3];
+            }
+            
+
+            if(is_uploaded_file($_FILES['anx_atm_atleta']["tmp_name"])) {
+              $anx_atm_atleta = $_FILES['anx_atm_atleta'];
+              $nome_arquivo_atm = $anx_atm_atleta['name'];
+              $novo_nome_atm = uniqid();
+              $extensao_atm = strtolower(pathinfo($nome_arquivo_atm, PATHINFO_EXTENSION));
+
+              move_uploaded_file($anx_atm_atleta["tmp_name"], $pasta . $novo_nome_atm . "." . $extensao_atm);
+            } else {
+              $novo_nome_atm = $dados[4];
+            }
+            
+
+            if(is_uploaded_file($_FILES['anx_cpr_atleta']["tmp_name"])) {
+              $anx_cpr_atleta = $_FILES['anx_cpr_atleta'];
+              $nome_arquivo_cpr = $anx_cpr_atleta['name'];
+              $novo_nome_cpr = uniqid();
+              $extensao_cpr = strtolower(pathinfo($nome_arquivo_cpr, PATHINFO_EXTENSION));
+
+              move_uploaded_file($anx_cpr_atleta["tmp_name"], $pasta . $novo_nome_cpr . "." . $extensao_cpr);
+            } else {
+              $novo_nome_cpr = $dados[5];
+            }
+            
+
             $id_convenio = mysqli_real_escape_string($conn, $_POST['id_convenio']);
 
             $sql = "UPDATE atletas SET 
@@ -52,11 +121,11 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
             pai_atleta='$pai_atleta',
             clb_atleta='$clb_atleta',
             trb_atleta='$trb_atleta',
-            anx_foto_atleta='$anx_foto_atleta',
-            anx_rg_atleta='$anx_rg_atleta',
-            anx_cpf_atleta='$anx_cpf_atleta',
-            anx_atm_atleta='$anx_atm_atleta',
-            anx_cpr_atleta='$anx_cpr_atleta',
+            anx_foto_atleta='$novo_nome_foto',
+            anx_rg_atleta='$novo_nome_rg',
+            anx_cpf_atleta='$novo_nome_cpf',
+            anx_atm_atleta='$novo_nome_atm',
+            anx_cpr_atleta='$novo_nome_cpr',
             id_convenio='$id_convenio'
             WHERE id_atleta = '$id_atleta'";
 
@@ -104,7 +173,7 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
       <h1 class="h2">Editando atleta</h1>
   </div>
-  <form class="body row" method="post" action="main.php?p=atletas/edit.php">
+  <form class="body row" method="post" action="main.php?p=atletas/edit.php"  enctype="multipart/form-data">
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
       <h1 class="h2">Visualizando atletas</h1>
   </div>
@@ -182,23 +251,23 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
   </div>
   <div class="col-md-4 mb-3">
     <label for="anx_foto_atleta" class="form-label">Foto do atleta</label>
-    <input type="file" class="form-control" id="anx_foto_atleta" name="anx_foto_atleta" value="<?=$dados[18];?>">
+    <input type="file" class="form-control" id="anx_foto_atleta" name="anx_foto_atleta">
   </div>
   <div class="col-md-4 mb-3">
     <label for="anx_rg_atleta" class="form-label">RG do atleta</label>
-    <input type="file" class="form-control" id="anx_rg_atleta" name="anx_rg_atleta" value="<?=$dados[19];?>">
+    <input type="file" class="form-control" id="anx_rg_atleta" name="anx_rg_atleta">
   </div>
   <div class="col-md-4 mb-3">
     <label for="anx_cpf_atleta" class="form-label">CPF do atleta</label>
-    <input type="file" class="form-control" id="anx_cpf_atleta" name="anx_cpf_atleta" value="<?=$dados[20];?>">
+    <input type="file" class="form-control" id="anx_cpf_atleta" name="anx_cpf_atleta">
   </div>
   <div class="col-md-4 mb-3">
     <label for="anx_atm_atleta" class="form-label">Atestado médico do atleta</label>
-    <input type="file" class="form-control" id="anx_atm_atleta" name="anx_atm_atleta" value="<?=$dados[21];?>">
+    <input type="file" class="form-control" id="anx_atm_atleta" name="anx_atm_atleta">
   </div>
   <div class="col-md-4 mb-3">
     <label for="anx_cpr_atleta" class="form-label">Cpr do atleta</label>
-    <input type="file" class="form-control" id="anx_cpr_atleta" name="anx_cpr_atleta" value="<?=$dados[22];?>">
+    <input type="file" class="form-control" id="anx_cpr_atleta" name="anx_cpr_atleta">
   </div> 
   <div class="col-md-4 mb-3">
     <label class="form-label">Código Convenio</label>

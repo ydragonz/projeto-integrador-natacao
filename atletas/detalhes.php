@@ -111,23 +111,28 @@ if($_SESSION['logado'] && $_SESSION['sts_usuario']) {
   </div>
   <div class="col-md-4 mb-3">
     <label for="anx_foto_atleta" class="form-label">Foto do atleta</label>
-    <input type="file" class="form-control" id="anx_foto_atleta" name="anx_foto_atleta" value="<?=$dados[18];?>" readonly>
+    <br>
+    <img src="arquivos/<?=$dados[18];?>.png" width='200px' height='200px'>
   </div>
   <div class="col-md-4 mb-3">
     <label for="anx_rg_atleta" class="form-label">RG do atleta</label>
-    <input type="file" class="form-control" id="anx_rg_atleta" name="anx_rg_atleta" value="<?=$dados[19];?>" readonly>
+    <br>
+    <img src="arquivos/<?=$dados[19];?>.png" width='300px' height='200px'>
   </div>
   <div class="col-md-4 mb-3">
     <label for="anx_cpf_atleta" class="form-label">CPF do atleta</label>
-    <input type="file" class="form-control" id="anx_cpf_atleta" name="anx_cpf_atleta" value="<?=$dados[20];?>" readonly>
+    <br>
+    <img src="arquivos/<?=$dados[20];?>.png" width='300px' height='200px'>
   </div>
   <div class="col-md-4 mb-3">
     <label for="anx_atm_atleta" class="form-label">Atestado médico do atleta</label>
-    <input type="file" class="form-control" id="anx_atm_atleta" name="anx_atm_atleta" value="<?=$dados[21];?>" readonly>
+    <br>
+    <img src="arquivos/<?=$dados[21];?>.png" width='300px' height='200px'>
   </div>
   <div class="col-md-4 mb-3">
     <label for="anx_cpr_atleta" class="form-label">Cpr do atleta</label>
-    <input type="file" class="form-control" id="anx_cpr_atleta" name="anx_cpr_atleta" value="<?=$dados[22];?>" readonly>
+    <br>
+    <img src="arquivos/<?=$dados[22];?>.png" width='300px' height='200px'>
   </div> 
   <div class="col-md-4 mb-3">
     <label class="form-label">Código Convenio</label>
