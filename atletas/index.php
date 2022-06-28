@@ -42,6 +42,7 @@ if($_SESSION['logado'] == 1) {
             <thead>
                     <tr>
                     <th scope="col">ID</th>
+                    <th scope="col">Foto</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Sexo</th>
                     <th scope="col">Cidade</th>
@@ -55,6 +56,7 @@ if($_SESSION['logado'] == 1) {
                 <tbody>
 
                     <?php
+                    $pasta = "arquivos/";
                     if(!isset($_GET['busca'])) {
                         while($row = $res->fetch_assoc()){
                             $sexo="";
@@ -66,6 +68,7 @@ if($_SESSION['logado'] == 1) {
                             }
                             echo "<tr>
                                 <td>".$row['id_atleta']."</td>
+                                <td><img src='".$pasta.$row['anx_foto_atleta'].".png' width='75px' height='75px'></td>
                                 <td>".$row['nom_atleta']."</td>
                                 <td>".$sexo."</td>
                                 <td>".$row['cid_atleta']."</td>

@@ -37,11 +37,11 @@ CREATE TABLE atletas (
     pai_atleta varchar(50),
     clb_atleta varchar(30),
     trb_atleta char(1),
-    anx_foto_atleta blob,
-    anx_rg_atleta blob,
-    anx_cpf_atleta blob,
-    anx_atm_atleta blob, 
-    anx_cpr_atleta blob,
+    anx_foto_atleta varchar(100),
+    anx_rg_atleta varchar(100),
+    anx_cpf_atleta varchar(100),
+    anx_atm_atleta varchar(100), 
+    anx_cpr_atleta varchar(100),
 	id_convenio INT(6),
     primary key(id_atleta)
 );

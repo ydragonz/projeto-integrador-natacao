@@ -11,6 +11,7 @@ if($_SESSION['logado'] == 1 && $_SESSION['sts_usuario'] == 1) {
       die("Erro de conexão: ".$conn->connect_error);
     }
     else {
+
       $nom_atleta = mysqli_real_escape_string($conn, $_POST['nom_atleta']);
       $dti_atleta = date('Y-m-d', strtotime($_POST['dti_atleta']));
       $dtn_atleta = date('Y-m-d', strtotime($_POST['dtn_atleta']));
@@ -28,15 +29,83 @@ if($_SESSION['logado'] == 1 && $_SESSION['sts_usuario'] == 1) {
       $pai_atleta = mysqli_real_escape_string($conn, $_POST['pai_atleta']);
       $clb_atleta = mysqli_real_escape_string($conn, $_POST['clb_atleta']);
       $trb_atleta = mysqli_real_escape_string($conn, $_POST['trb_atleta']);
+
+      $pasta = "arquivos/";
+
+      if(is_dir($pasta) ) {
+        if($open = opendir($pasta)) {
+          while(($file = readdir($open)) != false) {
+            if($file == '.' || $file == '..') continue;
+            echo '<img src="arquivos/'.$file.'" ';
+          }
+        }
+        closedir($open);
+      }
+      
       $anx_foto_atleta = $_FILES['anx_foto_atleta'];
+      $nome_arquivo_foto = $anx_foto_atleta['name'];
+      $novo_nome_foto = uniqid();
+      $extensao_foto = strtolower(pathinfo($nome_arquivo_foto, PATHINFO_EXTENSION));
+
+      /*if($extensao_foto != ".jpg" || $extensao_foto != ".png") {
+        die("Tipo de arquivo não aceito");
+      }*/
+
+      move_uploaded_file($anx_foto_atleta["tmp_name"], $pasta . $novo_nome_foto . "." . $extensao_foto);
+       
+
       $anx_rg_atleta = $_FILES['anx_rg_atleta'];
+      $nome_arquivo_rg = $anx_rg_atleta['name'];
+      $novo_nome_rg = uniqid();
+      $extensao_rg = strtolower(pathinfo($nome_arquivo_rg, PATHINFO_EXTENSION));
+
+      /*if($extensao_rg != ".jpg" && $extensao_rg != ".png") {
+        die("Tipo de arquivo não aceito");
+      }*/
+
+      move_uploaded_file($anx_rg_atleta["tmp_name"], $pasta . $novo_nome_rg . "." . $extensao_rg);
+
+
       $anx_cpf_atleta = $_FILES['anx_cpf_atleta'];
+      $nome_arquivo_cpf = $anx_cpf_atleta['name'];
+      $novo_nome_cpf = uniqid();
+      $extensao_cpf = strtolower(pathinfo($nome_arquivo_cpf, PATHINFO_EXTENSION));
+
+      /*if($extensao_cpf != "jpg" && $extensao_cpf != "png") {
+        die("Tipo de arquivo não aceito");
+      }*/
+
+      move_uploaded_file($anx_cpf_atleta["tmp_name"], $pasta . $novo_nome_cpf . "." . $extensao_cpf);
+
+
       $anx_atm_atleta = $_FILES['anx_atm_atleta'];
+      $nome_arquivo_atm = $anx_atm_atleta['name'];
+      $novo_nome_atm = uniqid();
+      $extensao_atm = strtolower(pathinfo($nome_arquivo_atm, PATHINFO_EXTENSION));
+
+      /*if($extensao_atm != "jpg" && $extensao_atm != "png") {
+        die("Tipo de arquivo não aceito");
+      }*/
+
+      move_uploaded_file($anx_atm_atleta["tmp_name"], $pasta . $novo_nome_atm . "." . $extensao_atm);
+
+
       $anx_cpr_atleta = $_FILES['anx_cpr_atleta'];
+      $nome_arquivo_cpr = $anx_cpr_atleta['name'];
+      $novo_nome_cpr = uniqid();
+      $extensao_cpr = strtolower(pathinfo($nome_arquivo_cpr, PATHINFO_EXTENSION));
+
+      /*if($extensao_cpr != "jpg" && $extensao_cpr != "png") {
+        die("Tipo de arquivo não aceito");
+      }*/
+
+      move_uploaded_file($anx_cpr_atleta["tmp_name"], $pasta . $novo_nome_cpr . "." . $extensao_cpr);
+
+
       $id_convenio = mysqli_real_escape_string($conn, $_POST['id_convenio']);
 
       $sql = "INSERT INTO atletas (id_atleta, nom_atleta, dti_atleta, dtn_atleta, nat_atleta, nac_atleta, rg_atleta, cpf_atleta, sex_atleta, end_atleta, bai_atleta, cep_atleta, cid_atleta, uf_atleta, mae_atleta, pai_atleta, clb_atleta, trb_atleta, anx_foto_atleta, anx_rg_atleta, anx_cpf_atleta, anx_atm_atleta, anx_cpr_atleta, id_convenio) 
-              VALUES (NULL, '$nom_atleta', '$dti_atleta', '$dtn_atleta', '$nat_atleta', '$nac_atleta', '$rg_atleta', '$cpf_atleta', '$sex_atleta', '$end_atleta', '$bai_atleta', '$cep_atleta', '$cid_atleta', '$uf_atleta', '$mae_atleta', '$pai_atleta', '$clb_atleta', '$trb_atleta', '$anx_foto_atleta', '$anx_rg_atleta', '$anx_cpf_atleta', '$anx_atm_atleta', '$anx_cpr_atleta', '$id_convenio')";
+              VALUES (NULL, '$nom_atleta', '$dti_atleta', '$dtn_atleta', '$nat_atleta', '$nac_atleta', '$rg_atleta', '$cpf_atleta', '$sex_atleta', '$end_atleta', '$bai_atleta', '$cep_atleta', '$cid_atleta', '$uf_atleta', '$mae_atleta', '$pai_atleta', '$clb_atleta', '$trb_atleta', '$novo_nome_foto', '$novo_nome_rg', '$novo_nome_cpf', '$novo_nome_atm', '$novo_nome_cpr', '$id_convenio')";
 
       if($conn->query($sql) === TRUE) {
         ?>
@@ -70,7 +139,7 @@ if($_SESSION['logado'] == 1 && $_SESSION['sts_usuario'] == 1) {
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Novo atleta</h1>
 </div>
-<form class="body row" action="main.php?p=atletas/new.php" method="POST">
+<form class="body row" action="main.php?p=atletas/new.php" enctype="multipart/form-data" method="POST">
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
       <h1 class="h2">Visualizando atletas</h1>
   </div>
